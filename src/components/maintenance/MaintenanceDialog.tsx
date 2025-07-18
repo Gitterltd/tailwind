@@ -118,8 +118,8 @@ const MaintenanceDialog = ({
     // Validate form
     if (!formData.forkliftId || !formData.issue || !formData.reportedBy || !formData.reportedDate) {
       toast({
-        title: "Erro ao salvar",
-        description: "Preencha todos os campos obrigatórios",
+        title: "Error Saving",
+        description: "Fill in all required fields",
         variant: "destructive"
       });
       return;
@@ -145,8 +145,8 @@ const MaintenanceDialog = ({
     onOpenChange(false);
     
     toast({
-      title: isEditing ? "Manutenção atualizada" : "Manutenção registrada",
-      description: `Manutenção ${isEditing ? 'atualizada' : 'registrada'} com sucesso!`
+      title: isEditing ? "Updated maintenance" : "Recorded maintenance",
+      description: `Maintenance ${isEditing ? 'updated' : 'registered'} successfully!`
     });
   };
 
@@ -154,11 +154,11 @@ const MaintenanceDialog = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>{isEditing ? 'Editar Manutenção' : 'Registrar Nova Manutenção'}</DialogTitle>
+          <DialogTitle>{isEditing ? 'Edit Maintenance' : 'Register New Maintenance'}</DialogTitle>
           <DialogDescription>
             {isEditing 
-              ? 'Edite as informações da manutenção nos campos abaixo.' 
-              : 'Preencha as informações da nova manutenção nos campos abaixo.'}
+              ? 'Edit the maintenance information in the fields below.' 
+              : 'Fill in the new maintenance information in the fields below.'}
           </DialogDescription>
         </DialogHeader>
         
@@ -166,13 +166,13 @@ const MaintenanceDialog = ({
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="forkliftId">Empilhadeira</Label>
+                <Label htmlFor="forkliftId">Fork-lift</Label>
                 <Select 
                   value={formData.forkliftId} 
                   onValueChange={handleForkliftChange}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecione a empilhadeira" />
+                    <SelectValue placeholder="Select Forklift" />
                   </SelectTrigger>
                   <SelectContent>
                     {availableForklifts.map(forklift => (
@@ -191,37 +191,37 @@ const MaintenanceDialog = ({
                   onValueChange={(value) => handleChange('status', value)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecione o status" />
+                    <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value={MaintenanceStatus.WAITING}>Aguardando</SelectItem>
-                    <SelectItem value={MaintenanceStatus.IN_PROGRESS}>Em andamento</SelectItem>
-                    <SelectItem value={MaintenanceStatus.COMPLETED}>Concluído</SelectItem>
+                    <SelectItem value={MaintenanceStatus.WAITING}>Waiting</SelectItem>
+                    <SelectItem value={MaintenanceStatus.IN_PROGRESS}>In Progress</SelectItem>
+                    <SelectItem value={MaintenanceStatus.COMPLETED}>Completed</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="issue">Descrição do Problema</Label>
+              <Label htmlFor="issue">Problem Description</Label>
               <Textarea 
                 id="issue" 
                 value={formData.issue} 
                 onChange={(e) => handleChange('issue', e.target.value)}
-                placeholder="Descreva o problema da empilhadeira"
+                placeholder="Describe the forklift problem"
                 rows={3}
               />
             </div>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="reportedBy">Reportado por</Label>
+                <Label htmlFor="reportedBy">Reported by</Label>
                 <Select 
                   value={formData.reportedBy} 
                   onValueChange={handleReporterChange}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecione" />
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>
                     {availableOperators.map(operator => (
@@ -234,7 +234,7 @@ const MaintenanceDialog = ({
               </div>
               
               <div className="space-y-2">
-                <Label>Data Reportada</Label>
+                <Label>Date Reported</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -260,7 +260,7 @@ const MaintenanceDialog = ({
             
             {formData.status === MaintenanceStatus.COMPLETED && (
               <div className="space-y-2">
-                <Label>Data de Conclusão</Label>
+                <Label>Date Completed</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -287,9 +287,9 @@ const MaintenanceDialog = ({
           
           <DialogFooter>
             <Button variant="outline" type="button" onClick={() => onOpenChange(false)}>
-              Cancelar
+              Cancel
             </Button>
-            <Button type="submit">{isEditing ? 'Salvar Alterações' : 'Registrar Manutenção'}</Button>
+            <Button type="submit">{isEditing ? 'Save Changes' : 'Register Maintenance'}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

@@ -231,7 +231,7 @@ const GasSupplyPage = () => {
                   onClick={handleFilterToggle}
                 >
                   <Filter className="w-4 h-4" />
-                  Filtrar
+                  Filter
                 </Button>
               </div>
               <Button 
